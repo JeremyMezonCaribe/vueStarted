@@ -18,24 +18,50 @@
           />
         </template>
       </div>
-      
     </div>
-    
+  </section>
+  <section>
+    <div class="container">
+      <h3>List of Characters (Rick and Morty)</h3>
+      <div class="grid-cards">
+        
+          <template v-for="character in listData" :key="character.id">+
+          <Card 
+            :titleCard=character.name
+            :imgSrc=character.image
+            :imgAlt=character.species
+            :textCard=character.status
+            :generes="[character.gender,character.origin.name]"
+          />
+        </template>
+        
+        
+      </div>
+    </div>
   </section>
 </template>
 
 <script>
 import Card from '@/components/Card';
 import FunButton from '@/components/FunButton';
-import { games } from '@/logic/code'
+import { games } from '@/logic/code';
+import axios from "axios";
+import { onMounted, ref } from 'vue';
 
 export default {
   components: { Card,FunButton },
   setup(){
     let gameList = games();
-    return{gameList};
+    let listData = ref([]);
+    // let isData = ref(false);
+    onMounted(async () => {
+      const res = await axios.get("https://rickandmortyapi.com/api/character");
+      listData.value = res.data.results;
+      console.log(res.data);
+    });
+  
+    return{gameList,listData};
   }
-
 }
 </script>
 

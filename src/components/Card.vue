@@ -12,10 +12,7 @@
         </li>
       </ul>
       <div class="card-button">
-        <funButton
-          nameButton="Touch me"
-          :accion="actionButton"
-        ></funButton>
+        <funButton nameButton="Touch me" :accion="actionButton"></funButton>
       </div>
     </div>
   </div>
