@@ -8,14 +8,15 @@
     <div class="container">
       <h2 class="title-container">Game List</h2>
       <div class="grid-cards">
-        <Card 
-        title="Red Dead Redemption"
-        imgSrc="https://missingnumber.com.mx/wp-content/uploads/2018/05/Portada-Red-Dead.jpg"
-        imgAlt="Red Dead"
-        text="Prueba"
-        />
-        <Card></Card>
-        <Card></Card>
+        <template v-for="(game,idx) in gameList" :key="idx">
+          <Card 
+            :titleCard=game.titleCard
+            :imgSrc=game.imgSrc
+            :imgAlt=game.imgAlt
+            :textCard=game.textCard
+            :generes=game.generes
+          />
+        </template>
       </div>
       
     </div>
@@ -24,10 +25,16 @@
 </template>
 
 <script>
-import Card from '@/components/Card'
+import Card from '@/components/Card';
+import FunButton from '@/components/FunButton';
+import { games } from '@/logic/code'
 
 export default {
-  components: { Card },
+  components: { Card,FunButton },
+  setup(){
+    let gameList = games();
+    return{gameList};
+  }
 
 }
 </script>
